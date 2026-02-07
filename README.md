@@ -1,59 +1,114 @@
-Campus Network Communication System
+🌐 Campus Network Communication System
 🎯 Project Overview
-A client-server application that simulates inter-campus communication for a multi-campus university network using TCP and UDP protocols.This project implements a distributed messaging system that connects multiple university campuses through a central server. The system enables authenticated campus-to-campus communication, real-time status monitoring, and broadcast announcements using both TCP and UDP protocols.
 
-Supported Campuses
+The Campus Network Communication System is a client-server application that simulates inter-campus communication for a multi-campus university network using TCP and UDP protocols.
+
+This project implements a distributed messaging system that connects multiple university campuses through a central server. The system enables:
+
+Authenticated campus-to-campus communication
+
+Real-time status monitoring using heartbeats
+
+University-wide broadcast announcements
+
+The project is designed as part of a Computer Networks Lab and demonstrates practical use of socket programming, multithreading, and networking protocols.
+
+🏫 Supported Campuses
+
 Lahore
-Karachi
-Peshawar
-CFD (City Campus)
-Multan
-Islamabad
-✨ Features
-Client Features
-Campus Authentication - Secure login with campus-specific credentials
-Inter-Campus Messaging - Send messages to specific departments in other campuses
-Real-time Message Reception - Receive messages from other campuses instantly
-Heartbeat Monitoring - Automatic status updates to the server every 10 seconds
-Broadcast Announcements - Receive university-wide announcements
-Multi-threaded Architecture - Concurrent handling of messaging, heartbeats, and announcements
-Server Features
-Multi-Client Support - Handle multiple campus connections simultaneously
-Authentication System - Verify campus credentials before allowing access
-Message Routing - Forward messages between authenticated campuses
-Heartbeat Tracking - Monitor campus connection status in real-time
-Admin Console - Interactive console for server management
-Broadcast System - Send announcements to all connected campuses
-Connection Logging - Track all authentication attempts and message routing
-🏗️ Architecture
-The system uses a client-server architecture with the following components:
 
-Server (Central Hub)
-TCP Server (Port 9000): Handles client authentication and message routing
-UDP Server (Port 9001): Receives heartbeat packets from clients
-Admin Console: Allows real-time monitoring and broadcast messaging
-Client (Campus Terminal)
-Thread 1: TCP listener for incoming messages
-Thread 2: UDP heartbeat sender (10-second intervals)
-Thread 3: UDP announcement listener
-Main Thread: User interface and message sending
+Karachi
+
+Peshawar
+
+CFD (City Campus)
+
+Multan
+
+Islamabad
+
+✨ Features
+🔹 Client Features
+
+Campus Authentication – Secure login using campus-specific credentials
+
+Inter-Campus Messaging – Send messages to specific departments of other campuses
+
+Real-time Message Reception – Instantly receive messages from other campuses
+
+Heartbeat Monitoring – Automatic status updates sent every 10 seconds
+
+Broadcast Announcements – Receive university-wide announcements
+
+Multi-threaded Architecture – Concurrent handling of messaging, heartbeats, and announcements
+
+🔹 Server Features
+
+Multi-Client Support – Handles multiple campus connections simultaneously
+
+Authentication System – Verifies campus credentials before access
+
+Message Routing – Routes messages between authenticated campuses
+
+Heartbeat Tracking – Monitors campus connection status in real time
+
+Admin Console – Interactive console for server monitoring and management
+
+Broadcast System – Sends announcements to all connected campuses
+
+Connection Logging – Logs authentication attempts and message routing
+
+🏗️ System Architecture
+
+The system follows a client-server architecture:
+
+🔸 Server (Central Hub)
+
+TCP Server (Port 9000) – Client authentication & message routing
+
+UDP Server (Port 9001) – Heartbeat reception
+
+Admin Console – Status monitoring & broadcast messaging
+
+🔸 Client (Campus Terminal)
+
+Thread 1 – TCP listener for incoming messages
+
+Thread 2 – UDP heartbeat sender (every 10 seconds)
+
+Thread 3 – UDP announcement listener
+
+Main Thread – User interface and message sending
+
 ┌─────────────┐     TCP/UDP      ┌──────────────┐     TCP/UDP      ┌─────────────┐
-│   Campus    │ ◄─────────────►  │    Central   │ ◄─────────────►  │   Campus    │
-│   Client    │                  │    Server    │                  │   Client    │
-│  (Lahore)   │                  │              │                  │  (Karachi)  │
-└─────────────┘                  └──────────────┘                  └─────────────┘
+│   Campus    │ ◄─────────────► │    Central   │ ◄─────────────► │   Campus    │
+│   Client    │                 │    Server    │                 │   Client    │
+│  (Lahore)   │                 │              │                 │  (Karachi)  │
+└─────────────┘                 └──────────────┘                 └─────────────┘
                                         ▲
                                         │
                                  ┌──────┴───────┐
                                  │ Admin Console│
                                  └──────────────┘
+
 💻 Technologies Used
+
 Language: C++11
+
 Networking: POSIX Sockets (BSD sockets)
+
 Threading: C++ Standard Library (<thread>)
-Protocols: TCP for messaging, UDP for heartbeats and broadcasts
-Build System: g++ compiler
-Simulation Tool: Cisco Packet Tracer (topology file included)
+
+Protocols:
+
+TCP → Messaging & authentication
+
+UDP → Heartbeats & broadcast announcements
+
+Compiler: g++
+
+Simulation Tool: Cisco Packet Tracer
+
 📁 Project Structure
 CN_Lab_Project/
 │
@@ -61,25 +116,41 @@ CN_Lab_Project/
 ├── client.cpp                      # Campus client implementation
 ├── CN Lab Project Topology.pkt     # Cisco Packet Tracer topology
 ├── CN Lab Project.pdf              # Project documentation
-└── README.md                       # This file
+└── README.md                       # Project README
+
 🚀 Installation
-Prerequisites
-Linux/Unix environment (Ubuntu, Fedora, macOS, or WSL on Windows)
+🔧 Prerequisites
+
+Linux / Unix environment (Ubuntu, Fedora, macOS, or WSL)
+
 g++ compiler with C++11 support
+
 POSIX-compliant operating system
-Compilation
-Clone or download the repository
+
+🛠️ Compilation
+
+Clone the repository:
+
 git clone <repository-url>
 cd CN_Lab_Project
-Compile the server
+
+
+Compile the server:
+
 g++ -std=c++11 -pthread server.cpp -o server
-Compile the client
+
+
+Compile the client:
+
 g++ -std=c++11 -pthread client.cpp -o client
+
 📖 Usage
-Running the Server
-Start the server on the host machine:
+▶️ Running the Server
 ./server
-The server will display:
+
+
+Server output:
+
 ======================================
   SERVER STARTED
   TCP Port: 9000
@@ -88,53 +159,64 @@ The server will display:
 
 [UDP] Listening for heartbeats on port 9001
 [ADMIN] Commands: status | announce <text> | exit
-Server Admin Commands
-status - View connection status of all campuses
-announce <message> - Send broadcast message to all connected campuses
-exit - Close admin console (server continues running)
-Running a Client
-Start a client on any machine that can reach the server:
+
+🧑‍💼 Admin Commands
+
+status → View connection status of all campuses
+
+announce <message> → Send broadcast message
+
+exit → Exit admin console (server continues running)
+
+▶️ Running a Client
 ./client
-Enter campus name when prompted:
+
+
+Enter campus name:
+
 Enter Campus Name (Lahore/Karachi/Peshawar/CFD/Multan/Islamabad): Lahore
-The client will authenticate and display the menu:
+
+
+Successful authentication:
+
 [CONNECTED] to server at 127.0.0.1:9000
 [AUTHENTICATED] Welcome Lahore!
+
+
+Menu:
 
 ===== Lahore Campus Menu =====
 1. Send Message to Another Campus
 2. Logout and Exit
-Choice:
-Sending Messages
-Select option 1 from the menu
-Enter the target campus name (e.g., "Karachi")
-Enter the target department (e.g., "CS Department")
-Type your message
-The message will be routed through the server to the destination
-Example Session
-Lahore Client sends to Karachi:
 
-Choice: 1
+✉️ Messaging Example
+Lahore → Karachi
 Target Campus: Karachi
 Target Department: IT Department
 Your Message: Server maintenance scheduled for tonight
-[SENT] Message delivered to server
-Karachi Client receives:
+
+
+Karachi receives:
 
 [NEW MESSAGE] [From Lahore - IT Department] Server maintenance scheduled for tonight
+
 🌐 Network Topology
-The project includes a Cisco Packet Tracer topology file (CN Lab Project Topology.pkt) that demonstrates:
+
+The included Cisco Packet Tracer (.pkt) file demonstrates:
 
 Campus network configuration
-Router and switch setup
+
+Routers and switches
+
 IP addressing scheme
+
 Server placement
+
 Inter-campus connectivity
-Open the .pkt file in Cisco Packet Tracer to view and simulate the network design.
+
+Open the .pkt file in Cisco Packet Tracer to simulate the network.
 
 🔐 Campus Authentication
-Each campus has a unique password for authentication:
-
 Campus	Password
 Lahore	NU-LHR-123
 Karachi	NU-KHI-123
@@ -142,70 +224,90 @@ Peshawar	NU-PSH-123
 CFD	NU-CFD-123
 Multan	NU-MTN-123
 Islamabad	NU-ISB-123
-Note: Credentials are hardcoded for demonstration purposes. In production, use secure authentication mechanisms.
+
+⚠️ Credentials are hardcoded for demonstration purposes only.
 
 📡 Protocol Details
-TCP Communication (Port 9000)
-Purpose: Authentication, message routing, and reliable delivery
-Message Format:
+🔹 TCP (Port 9000)
+
+Purpose: Authentication & reliable messaging
+Formats:
+
 Authentication: Campus:<name>;Pass:<password>;
-Messaging: FROM:<source>;TO:<destination>;DEPT:<department>;MSG:<text>
+Message: FROM:<source>;TO:<destination>;DEPT:<department>;MSG:<text>
 Logout: LOGOUT;
-UDP Communication (Port 9001)
-Purpose: Heartbeat monitoring and broadcast announcements
-Heartbeat Format: HEART|Campus:<name>|TS:<timestamp>
-Broadcast Format: ANNOUNCEMENT:<message>
-Frequency: Heartbeats sent every 10 seconds
-Threading Model
-Server Threads:
 
-Main thread: Accept incoming TCP connections
-UDP thread: Listen for heartbeat packets
-Admin thread: Handle console commands
-Client threads: One per connected campus (detached)
-Client Threads:
+🔹 UDP (Port 9001)
 
-Main thread: User interface and menu
-TCP listener: Receive incoming messages
-Heartbeat sender: Send status updates
-Announcement listener: Receive broadcasts
+Purpose: Heartbeats & broadcasts
+
+Heartbeat: HEART|Campus:<name>|TS:<timestamp>
+Broadcast: ANNOUNCEMENT:<message>
+
+
+Heartbeat Interval: Every 10 seconds
+
 🛠️ Troubleshooting
 Common Issues
-1. "Cannot bind to port"
 
-Ensure no other process is using ports 9000 or 9001
-Try running with elevated privileges if necessary
-2. "Cannot connect to server"
+Cannot bind to port
+
+Ensure ports 9000 and 9001 are free
+
+Cannot connect to server
 
 Verify server is running
-Check IP address in client.cpp (default: 127.0.0.1)
-Ensure firewall allows connections on ports 9000 and 9001
-3. Authentication fails
 
-Verify campus name spelling (case-sensitive)
-Check password matches the predefined values
-4. Messages not received
+Check IP address in client.cpp
 
-Verify both campuses are authenticated
-Check server logs for routing information
-Ensure target campus name is spelled correctly
+Ensure firewall allows connections
+
+Authentication fails
+
+Campus name is case-sensitive
+
+Verify correct password
+
+Messages not received
+
+Ensure both campuses are authenticated
+
+Check server logs
+
 🔮 Future Enhancements
-Database integration for dynamic campus registration
+
+Database-based authentication
+
 Encrypted communication (TLS/SSL)
-File transfer capabilities
+
+File transfer support
+
 Web-based admin dashboard
-Message persistence and history
-Group messaging and channels
-Mobile client applications
+
+Message history & persistence
+
+Group messaging
+
+Mobile clients
+
 📄 License
-This project is part of a Computer Networks Lab assignment and is intended for educational purposes.
+
+This project is developed for educational purposes as part of a Computer Networks Lab assignment.
 
 👥 Team Members
+
 23F-0734
+
 23F-0839
+
 23F-0807
+
 🙏 Acknowledgments
-Course instructor for project guidance
-Team members for collaborative development
+
+Course instructor for guidance
+
+Team members for collaboration
+
 POSIX socket programming references
+
 C++ threading documentation
